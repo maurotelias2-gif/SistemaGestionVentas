@@ -8,6 +8,8 @@ function inicio() {
 
     document.querySelector("#btnAgregarProducto").addEventListener("click", agregarProducto);
 
+    document.querySelector("#btnRegistrarVenta").addEventListener("click", registrarVenta);
+
 }
 
 function registrarUsuario() {
@@ -143,6 +145,76 @@ function mostrarProductos() {
             unProducto.descripcion + " - $" +
             unProducto.precio + " - Stock: " +
             unProducto.stock;
+
+        lista.appendChild(item);
+
+    }
+
+}
+function registrarVenta() {
+
+    let nombre = document.querySelector("#txtNombreVenta").value;
+    let cantidad = Number(document.querySelector("#numCantidadVenta").value);
+
+    let productoEncontrado = null;
+
+    for (let unProducto of sistema.productos) {
+
+        if (unProducto.nombre.toLowerCase() === nombre.toLowerCase()) {
+
+            productoEncontrado = unProducto;
+
+        }
+
+    }
+    if (productoEncontrado !== null) {
+
+        if (productoEncontrado.stock >= cantidad) {
+
+            productoEncontrado.stock -= cantidad;
+
+            let nuevaVenta = new Venta(productoEncontrado, cantidad);
+
+            sistema.ventas.push(nuevaVenta);
+
+            document.querySelector("#mensajeVenta").innerHTML =
+                "Venta registrada correctamente.";
+
+            mostrarProductos();
+
+            mostrarVentas();
+
+        } else {
+
+            document.querySelector("#mensajeVenta").innerHTML =
+                "Stock insuficiente.";
+
+        }
+    } else {
+
+        document.querySelector("#mensajeVenta").innerHTML =
+            "El producto no existe.";
+
+    }
+
+    document.querySelector("#txtNombreVenta").value = "";
+    document.querySelector("#numCantidadVenta").value = "";
+}
+
+function mostrarVentas() {
+
+    let lista = document.querySelector("#listaVentas");
+
+    lista.innerHTML = "";
+
+    for (let unaVenta of sistema.ventas) {
+
+        let item = document.createElement("li");
+
+        item.innerHTML =
+            unaVenta.producto.nombre +
+            " - Cantidad: " +
+            unaVenta.cantidad;
 
         lista.appendChild(item);
 

@@ -65,9 +65,23 @@
 
     <section id="ventas" hidden>
 
-        <h2>Ventas</h2>
+    <h2>Registro de ventas</h2>
 
-    </section>
+    <label for="txtNombreVenta">Producto</label>
+    <input type="text" id="txtNombreVenta">
+
+    <label for="numCantidadVenta">Cantidad</label>
+    <input type="number" id="numCantidadVenta" min="1">
+
+    <button id="btnRegistrarVenta">Registrar venta</button>
+
+    <p id="mensajeVenta"></p>
+
+    <h3>Ventas realizadas</h3>
+
+    <ul id="listaVentas"></ul>
+
+</section>
 </body>
 
 </html>
