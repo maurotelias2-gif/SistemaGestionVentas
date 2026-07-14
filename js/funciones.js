@@ -6,6 +6,8 @@ function inicio() {
 
     document.querySelector("#btnLogin").addEventListener("click", iniciarSesion);
 
+    document.querySelector("#btnAgregarProducto").addEventListener("click", agregarProducto);
+
 }
 
 function registrarUsuario() {
@@ -90,5 +92,60 @@ function iniciarSesion() {
 
     document.querySelector("#txtUsuario").value = "";
     document.querySelector("#txtPassword").value = "";
+
+}
+function agregarProducto() {
+
+    let nombre = document.querySelector("#txtNombreProducto").value;
+    let descripcion = document.querySelector("#txtDescripcionProducto").value;
+    let precio = Number(document.querySelector("#numPrecioProducto").value);
+    let stock = Number(document.querySelector("#numStockProducto").value);
+
+    if (nombre !== "" &&
+        descripcion !== "" &&
+        precio > 0 &&
+        stock > 0) {
+
+        let nuevoProducto = new Producto(nombre, descripcion, precio, stock);
+
+        sistema.productos.push(nuevoProducto);
+        mostrarProductos();
+
+        document.querySelector("#mensajeProducto").innerHTML =
+            "Producto agregado correctamente.";
+
+    } else {
+
+        document.querySelector("#mensajeProducto").innerHTML =
+            "Complete todos los campos correctamente.";
+
+    }
+
+    document.querySelector("#txtNombreProducto").value = "";
+    document.querySelector("#txtDescripcionProducto").value = "";
+    document.querySelector("#numPrecioProducto").value = "";
+    document.querySelector("#numStockProducto").value = "";
+
+}
+
+function mostrarProductos() {
+
+    let lista = document.querySelector("#listaProductos");
+
+    lista.innerHTML = "";
+
+    for (let unProducto of sistema.productos) {
+
+        let item = document.createElement("li");
+
+        item.innerHTML =
+            unProducto.nombre + " - " +
+            unProducto.descripcion + " - $" +
+            unProducto.precio + " - Stock: " +
+            unProducto.stock;
+
+        lista.appendChild(item);
+
+    }
 
 }

@@ -37,7 +37,27 @@
 
     <section id="productos" hidden>
 
-        <h2>Productos</h2>
+        <h2>Alta de productos</h2>
+
+        <label for="txtNombreProducto">Nombre</label>
+        <input type="text" id="txtNombreProducto">
+
+        <label for="txtDescripcionProducto">Descripción</label>
+        <input type="text" id="txtDescripcionProducto">
+
+        <label for="numPrecioProducto">Precio</label>
+        <input type="number" id="numPrecioProducto" min="1">
+
+        <label for="numStockProducto">Stock</label>
+        <input type="number" id="numStockProducto" min="1">
+
+        <button id="btnAgregarProducto">Agregar producto</button>
+
+        <p id="mensajeProducto"></p>
+
+        <h3>Productos registrados</h3>
+
+        <ul id="listaProductos"></ul>
 
     </section>
 
